@@ -1,0 +1,79 @@
+/* Estilos generales para la página */
+.registerPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../assets/images/logreg/register.jpeg'); /* Reemplaza por la ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Fondo con opacidad para el formulario */
+  .registerFormWrapper {
+    position: absolute;
+    left: 10%; /* Deja un margen en el lado izquierdo */
+    top: 50%;
+    transform: translateY(-50%); /* Centra el formulario verticalmente */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con transparencia */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    width: 35%;
+    min-width: 300px;
+  }
+  
+  /* Título del formulario */
+  .registerFormWrapper h3 {
+    font-size: 2rem;
+    color: #b8860b; /* Color dorado */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del formulario */
+  .registerFormWrapper input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid #b8860b; /* Borde dorado */
+    background-color: #333; /* Fondo oscuro para los campos */
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Efecto al poner foco en los campos de entrada */
+  .registerFormWrapper input:focus {
+    border-color: #ffd700; /* Borde dorado brillante al enfocar */
+    outline: none;
+  }
+  
+  /* Estilos del botón */
+  .registerFormWrapper button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #b8860b; /* Color dorado */
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efecto al pasar el cursor por el botón */
+  .registerFormWrapper button:hover {
+    background-color: #ffd700; /* Cambia a dorado brillante */
+  }
+  
+  /* Mensaje de error */
+  .errorMessage {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-align: left;
+  }
+  

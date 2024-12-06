@@ -1,0 +1,77 @@
+/* General styling for the Admin Panel */
+.adminPanel {
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+  }
+  
+  /* Title styling */
+  .adminPanel h2 {
+    font-size: 24px;
+    color: #ffd700; /* Dorado brillante */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph styling */
+  .adminPanel p {
+    font-size: 16px;
+    text-align: center;
+    color: #ccc; /* Blanco suave */
+    margin-bottom: 30px;
+  }
+  
+  /* Table styling */
+  .adminPanel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .adminPanel th,
+  .adminPanel td {
+    border: 1px solid #ffd700; /* Borde dorado */
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .adminPanel th {
+    background-color: #222; /* Fondo oscuro para encabezados */
+    color: #ffd700; /* Texto dorado */
+  }
+  
+  .adminPanel td {
+    background-color: #111; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+  }
+  
+  /* Buttons styling */
+  .adminPanel button {
+    background-color: #ffd700; /* Fondo dorado */
+    color: #000; /* Texto negro */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .adminPanel button:hover {
+    background-color: #e5c100; /* Dorado más oscuro al pasar el mouse */
+  }
+  
+  /* Add some spacing */
+  .adminPanel button + button {
+    margin-left: 8px;
+  }
+  
+  /* Table row hover effect */
+  .adminPanel tr:hover td {
+    background-color: #333; /* Resaltar fila */
+  }
+  

@@ -1,0 +1,62 @@
+.header {
+    background-color: #000; /* Fondo negro elegante */
+    color: #fff; /* Texto blanco */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #b8860b; /* Línea dorada */
+  }
+  
+  .header h1 {
+    font-family: 'Georgia', serif; /* Tipografía clásica */
+    font-size: 2rem;
+    margin: 0;
+    color: #b8860b; /* Tono dorado */
+  }
+  
+  .nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .nav a:hover {
+    color: #b8860b; /* Resaltar con dorado al pasar el cursor */
+  }
+  
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .userInfo p {
+    margin: 0;
+    font-size: 1rem;
+    font-style: italic;
+    color: #fff;
+  }
+  
+  .logoutButton {
+    background-color: #b8860b; /* Botón dorado */
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logoutButton:hover {
+    background-color: #e5b047; /* Más claro al pasar el cursor */
+  }
+  

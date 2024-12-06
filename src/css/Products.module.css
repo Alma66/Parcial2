@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden; /* Evita el scroll horizontal */
+}
+
+.productsContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas */
+  gap: 20px; /* Espacio entre tarjetas */
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.productsWrapper {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #1a1a1a; /* Fondo oscuro elegante */
+  color: #f3f3f3; /* Color de texto claro */
+  padding: 40px 0;
+}
+
+.productCard {
+  border: 1px solid #b8a99a; /* Color dorado suave */
+  padding: 20px;
+  text-align: center;
+  background-color: #2c2c2c; /* Fondo oscuro pero cálido */
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.productCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+}
+
+.productImage {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 3px solid #b8a99a; /* Bordes dorados */
+}
+
+.addToCartButton {
+  background-color: #d4af37; /* Dorado cálido */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.addToCartButton:hover {
+  background-color: #c68e17; /* Dorado oscuro */
+}
+
+.searchBar {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #b8a99a;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+  color: #f3f3f3;
+  transition: background-color 0.3s ease;
+}
+
+.searchBar:focus {
+  background-color: #2c2c2c;
+  outline: none;
+  border-color: #d4af37;
+}
+
+h1 {
+  font-family: 'Georgia', serif; /* Elegante y sofisticado */
+  font-size: 2.5rem;
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+nav a {
+  color: #d4af37; /* Enlaces dorados */
+  font-size: 1.2rem;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #f3f3f3; /* Cambio de color al pasar el cursor */
+}
+
+nav a:active {
+  color: #c68e17; /* Color dorado más oscuro cuando se hace clic */
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 128, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+}

@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.28946350.css",
+    "main.js": "/static/js/main.45b6c022.js",
+    "static/media/pjoven3.png": "/static/media/pjoven3.d3729117a511b80d2cf9.png",
+    "static/media/hermanos2.jpg": "/static/media/hermanos2.68b8cd77a172b67ac996.jpg",
+    "static/media/harmonie_royale.png": "/static/media/harmonie_royale.4a71388eda4d885cf49c.png",
+    "static/media/hermana3.jpg": "/static/media/hermana3.baebc38aaa8b07a2a208.jpg",
+    "static/media/ebano.jpeg": "/static/media/ebano.b4977d0cc3b824e887c1.jpeg",
+    "static/media/serenite_emeraude.png": "/static/media/serenite_emeraude.e813219c1487c885e4ea.png",
+    "static/media/eclat_rubis.png": "/static/media/eclat_rubis.438a83a393310be94923.png",
+    "static/media/legende_verte.png": "/static/media/legende_verte.02bc06bc23a102d5adaa.png",
+    "static/media/emeraude_royale.png": "/static/media/emeraude_royale.0166b4b399d0692cddd4.png",
+    "static/media/banner1.jpeg": "/static/media/banner1.90ae4a121e898e618e64.jpeg",
+    "static/media/flamme_rouge.png": "/static/media/flamme_rouge.69383b47b5fef0bb85e7.png",
+    "static/media/eclat_saphir.png": "/static/media/eclat_saphir.827b2fc7c77520af185d.png",
+    "static/media/monnaie_dor.png": "/static/media/monnaie_dor.d44ee5694ab13c64c8bd.png",
+    "static/media/saphir_celeste.png": "/static/media/saphir_celeste.b668cf5d584fbf3c9a00.png",
+    "static/media/hermana1.jpeg": "/static/media/hermana1.f2ff9fff5ae98df83d77.jpeg",
+    "static/media/etoile_argentee.png": "/static/media/etoile_argentee.fc7221130163f0faf0dc.png",
+    "static/media/banner3.jpeg": "/static/media/banner3.9c9ca81291edf953d31b.jpeg",
+    "static/media/rouge_eternel.png": "/static/media/rouge_eternel.0678eb50b649cbe1045c.png",
+    "static/media/emeraude_enchantee.png": "/static/media/emeraude_enchantee.cd7ca1412de219bd7d4d.png",
+    "static/media/reflet_lune.png": "/static/media/reflet_lune.120dac8553faac8011e5.png",
+    "static/media/login.jpeg": "/static/media/login.9c0385a5233b8d0ce5db.jpeg",
+    "static/media/banner2.jpeg": "/static/media/banner2.7f2d5bb28dbf07196e85.jpeg",
+    "static/media/flamme_imperiale.png": "/static/media/flamme_imperiale.b59ca2962bc610f79ade.png",
+    "static/media/cirque_dargent.png": "/static/media/cirque_dargent.e1e8576c820089f68cf7.png",
+    "static/media/register.jpeg": "/static/media/register.49f41f767ecdebcfca40.jpeg",
+    "static/media/lumiere_azur.png": "/static/media/lumiere_azur.10094e2dda407c4f83ec.png",
+    "static/media/couronne_rubis.png": "/static/media/couronne_rubis.5863a285f48cb1b0a632.png",
+    "index.html": "/index.html",
+    "main.28946350.css.map": "/static/css/main.28946350.css.map",
+    "main.45b6c022.js.map": "/static/js/main.45b6c022.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28946350.css",
+    "static/js/main.45b6c022.js"
+  ]
+}

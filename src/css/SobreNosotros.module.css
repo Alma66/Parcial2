@@ -1,0 +1,87 @@
+/* Contenedor principal */
+.container {
+  font-family: 'Georgia', serif;
+  background-color: #000; /* Fondo elegante negro */
+  color: #fff; /* Contraste con texto blanco */
+  max-width: 100%; /* Ocupa toda la pantalla */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Título principal */
+.title {
+  font-size: 3rem; /* Título más grande */
+  margin-bottom: 40px;
+  color: #b8860b; /* Tono dorado */
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Secciones alternas */
+.section,
+.sectionReverse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Se adapta en pantallas pequeñas */
+  gap: 20px; /* Espacio entre texto e imagen */
+  padding: 40px 20px;
+}
+
+/* Inversión de la sección */
+.sectionReverse {
+  flex-direction: row-reverse; /* Invierte el orden */
+}
+
+/* Bloque de texto */
+.textBlock {
+  flex: 1;
+  padding: 20px;
+  text-align: justify;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+}
+
+/* Bloque de imagen */
+.imageBlock {
+  flex: 1;
+  text-align: center;
+}
+
+/* Imagen */
+.image {
+  max-width: 90%; /* Escala proporcionalmente */
+  max-height: 400px; /* Tamaño máximo en altura */
+  height: auto; /* Mantiene proporciones */
+  width: auto; /* Evita distorsión */
+  border-radius: 10px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+  border: 4px solid #b8860b; /* Bordes dorados */
+}
+
+/* Última sección */
+.lastSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 40px; /* Espacio extra */
+}
+
+.lastSection .textBlock {
+  font-size: 1.5rem; /* Texto destacado */
+  margin-bottom: 20px;
+}
+
+.lastSection .imageBlock {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.lastSection .image {
+  max-width: 80%; /* Más pequeño que otras imágenes */
+  max-height: 300px; /* Reduce la altura máxima */
+  border-radius: 10px;
+}

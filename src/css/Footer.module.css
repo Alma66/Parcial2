@@ -1,0 +1,67 @@
+/* Estilos generales del footer */
+.footer {
+    background-color: #000; /* Fondo negro para mantener la elegancia */
+    color: #fff; /* Texto blanco */
+    padding: 40px 20px;
+    text-align: center;
+    font-family: 'Georgia', serif; /* Elegante y sofisticado */
+    border-top: 3px solid #b8860b; /* Borde dorado en la parte superior */
+  }
+  
+  .footer h2 {
+    font-size: 2rem;
+    color: #b8860b; /* Tono dorado para el título */
+    margin-bottom: 20px;
+  }
+  
+  .footer p {
+    font-size: 1rem;
+    color: #dcdcdc; /* Gris claro para el texto */
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .footer .socialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espaciado entre íconos sociales */
+    margin-top: 30px;
+  }
+  
+  .footer .socialLinks a {
+    color: #fff;
+    font-size: 1.5rem; /* Tamaño de los íconos */
+    transition: color 0.3s ease;
+  }
+  
+  .footer .socialLinks a:hover {
+    color: #b8860b; /* Cambio de color dorado al pasar el ratón */
+  }
+  
+  .footer .credits {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #b8860b; /* Color dorado para los créditos */
+    font-style: italic;
+  }
+  
+  /* Media query para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 30px 15px;
+    }
+  
+    .footer h2 {
+      font-size: 1.8rem;
+    }
+  
+    .footer p {
+      font-size: 1rem;
+    }
+  
+    .footer .socialLinks {
+      flex-direction: column;
+      gap: 10px; /* Espaciado más pequeño en móviles */
+    }
+  }
+  
