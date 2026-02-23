@@ -1,0 +1,243 @@
+/* cart-styles.override.css - Versión completa y autosuficiente
+   Mantiene los estilos originales, incorpora los fixes para la onda y la visibilidad.
+*/
+
+/* ========== Variables ========== */
+:root {
+  --accent: #D4AF37; /* Dorado principal */
+  --accent-hover: #B28914; /* Hover/activo */
+  --bg: #f2f2f3; /* Fondo de la página */
+  --card-bg: #ffffff; /* Tarjeta principal */
+  --panel-bg: #fbfafb; /* Panel derecho */
+  --muted: #9b9b9b; /* Textos secundarios */
+  --text: #2b2b2b; /* Texto principal */
+  --shadow: 0 26px 40px rgba(20,20,20,0.06);
+}
+
+/* ========== Reset mínimo ========== */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  background: var(--bg);
+  font-family: "Poppins", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Contenedor principal (tarjeta centrada) ========== */
+.cart {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Asegurar que los hijos estén por encima del pseudo (onda) */
+.cart > * { position: relative; z-index: 2; }
+
+/* ========== Decoración superior: onda dorada ========== */
+/* Onda menos intrusiva: height reducido + background-size contain */
+.cart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -2%;
+  height: 340px;         /* reducido para no cubrir contenido */
+  width: 110%;
+  background-image: url("/src/assets/images/cartwave.png"); /* ajustá ruta si hace falta */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left top;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========== Columnas ========== */
+/* Left column - productos */
+.cartLeft {
+  flex: 1;
+  /* padding-top aumentado para que el header quede visualmente debajo de la onda
+     y no pegado a la parte superior (evita quedar tapado) */
+  padding: 120px 48px 48px 48px;
+  min-height: 420px;
+}
+
+/* Right column - resumen */
+.cartSummary {
+  width: 340px; /* se puede ajustar a 320 si querés aún más espacio a la izquierda */
+  background: var(--panel-bg);
+  padding: 48px;
+  border-left: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+/* ========== Header (titulo + items) ========== */
+/* Caja con fondo semitransparente para legibilidad */
+.cartHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  background: rgba(255,255,255,0.96);
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  /* sticky para que quede visible al scrollear dentro de la columna */
+  position: sticky;
+  top: 28px;
+}
+
+/* Título */
+.cartHeader h2 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Contador de items alineado a la derecha */
+.cartHeader .itemsCount {
+  margin-left: auto;
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 700;
+  align-self: center;
+}
+
+/* ========== Lista de items ========== */
+.cartItemsList {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Item individual */
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cartItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* Thumb */
+.cartItem .thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cartItem .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Meta */
+.cartItem .metaWrap { display: flex; flex-direction: column; gap: 6px; }
+.cartItem h3 { font-size: 1rem; font-weight: 600; margin: 0; color: var(--text); }
+.cartItem .meta { font-size: 0.8125rem; color: var(--muted); }
+.cartItem .qty { font-size: 0.875rem; color: var(--muted); }
+
+/* Precio y eliminar */
+.cartItem .price { margin-left: auto; font-size: 1rem; font-weight: 600; color: var(--text); }
+.cartItem .remove {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e6e6e6;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+/* ========== Resumen derecho ========== */
+.cartSummary .section { margin-bottom: 22px; }
+.cartSummary label { font-size: 0.8125rem; color: var(--muted); display: block; margin-bottom: 6px; }
+.cartSummary .value { color: var(--text); font-size: 0.95rem; }
+
+.cartSummary .edit { color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 0.875rem; }
+.cartSummary .edit:hover { color: var(--accent-hover); }
+
+/* Cupón */
+.cartSummary .coupon { display: flex; gap: 8px; margin-bottom: 18px; }
+.cartSummary .coupon input {
+  flex: 1; padding: 10px; border: 1px solid #e6e6e6; border-radius: 6px; font-size: 0.95rem;
+}
+.cartSummary .coupon input:focus { outline: none; box-shadow: 0 0 0 4px rgba(212,175,55,0.12); }
+.cartSummary .coupon button { padding: 10px 14px; background: #4a4a4a; color: white; border: none; border-radius: 6px; cursor: pointer; }
+
+/* Totales */
+.totals { margin-bottom: 22px; }
+.totals .line { display:flex; justify-content: space-between; margin-bottom: 8px; }
+.totals .label { color: var(--muted); }
+.totals .value { color: var(--text); }
+.totals .total { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+
+/* Checkout button */
+.checkout {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.18s ease;
+}
+.checkout:hover { background: var(--accent-hover); }
+.checkout::before { content: "🔒"; }
+
+/* Empty cart message */
+.cartLeft p {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 18px 0;
+  line-height: 1.5;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .cart { flex-direction: column; margin: 20px; }
+  .cartLeft, .cartSummary { padding: 24px; }
+  .cartSummary { width: 100%; border-left: none; border-top: 1px solid #eee; }
+  /* Reducir la altura de la onda en móviles */
+  .cart::before { height: 180px; background-size: contain; left: -4%; }
+  .cartLeft { padding-top: 80px; }
+}
+
+/* Extra pequeño ajuste visual si la onda aún llega al header en algunos tamaños */
+@media (min-width: 1200px) {
+  .cart::before { height: 380px; }
+}

@@ -1,20 +1,62 @@
-import React from 'react';
-import { useAuth } from '../context/AuthContext'; 
-import AdminPanel from '../components/AdminPanel'; // Componente de panel de administración
-import styles from '../css/Home.module.css'; 
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom'; // Para el botón de contacto
+import styles from '../css/Home.module.css';
 
-// Imágenes importadas
+// Imágenes importadas (banner1 intacto)
 import banner1 from '../assets/images/banner/banner1.jpeg';
 import banner2 from '../assets/images/banner/banner2.jpeg';
 import banner3 from '../assets/images/banner/banner3.jpeg';
 
 const Home = () => {
-  // Obtener  usuario actual desde el contexto
-  const { user } = useAuth(); 
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const autoplayRef = useRef(null);
+
+  // Fetch de productos destacados
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        if (!response.ok) throw new Error('Error al cargar productos');
+        const data = await response.json();
+        setFeaturedProducts(data.slice(0, 6));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchFeaturedProducts();
+  }, []);
+
+  // Lógica del carrusel
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(featuredProducts.length / 3));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + Math.ceil(featuredProducts.length / 3)) % Math.ceil(featuredProducts.length / 3));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  // Autoplay
+  useEffect(() => {
+    autoplayRef.current = setInterval(nextSlide, 4000);
+    return () => clearInterval(autoplayRef.current);
+  }, [featuredProducts]);
+
+  const handleMouseEnter = () => clearInterval(autoplayRef.current);
+  const handleMouseLeave = () => {
+    autoplayRef.current = setInterval(nextSlide, 4000);
+  };
+
+  const totalSlides = Math.ceil(featuredProducts.length / 3);
 
   return (
     <div className={styles.homeContainer}>
-      {/* Banner principal */}
+      {/* Banner principal - INTACTO */}
       <div className={styles.mainBanner}>
         <img src={banner1} alt="Banner principal de Ébano & Bronce" className={styles.bannerImage} />
         <div className={styles.bannerText}>
@@ -22,25 +64,72 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Tres columnas de texto */}
+      {/* Carrusel - AJUSTADO */}
+      <div className={styles.carouselSection}>
+        <h2 className={styles.sectionTitle}>Piezas Destacadas</h2>
+        <div
+          className={styles.carousel}
+          ref={carouselRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div
+            className={styles.carouselTrack}
+            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+          >
+            {featuredProducts.map((product, index) => (
+              <div key={product.id} className={styles.carouselItem}>
+                <img src={product.imageUrl} alt={product.name} className={styles.carouselImage} />
+                <h3>{product.name}</h3>
+                <p>${product.price}</p>
+                <button className={styles.ctaButton}>Descubrir</button>
+              </div>
+            ))}
+          </div>
+          <button className={styles.prevButton} onClick={prevSlide}>‹</button>
+          <button className={styles.nextButton} onClick={nextSlide}>›</button>
+        </div>
+        {/* Línea amarilla debajo - Indicadores clicables */}
+        <div className={styles.carouselIndicator}>
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <div
+              key={index}
+              className={`${styles.indicatorDot} ${index === currentIndex ? styles.active : ''}`}
+              onClick={() => goToSlide(index)}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Nueva sección: La Historia de Ébano & Bronce */}
+      <div className={styles.historySection}>
+        <h2>La Historia de Ébano & Bronce</h2>
+        <p>Inspirada en las raíces multiculturales de sus fundadores, Ébano & Bronce nace de la fusión de tradiciones francesas de refinamiento, la vibrante espiritualidad india, la precisión alemana y el apasionado espíritu argentino. Desde nuestros talleres en el corazón de Europa, creamos joyas que narran historias de amor, fe y elegancia. Cada colección es un viaje: el ébano simboliza la fuerza serena de la naturaleza, mientras que el bronce evoca la calidez del sol mediterráneo. Nuestros diseños no solo adornan, sino que conectan generaciones, celebrando la diversidad como el mayor tesoro. Únete a esta saga de lujo atemporal.</p>
+        <p>Desde 2010, hemos honrado las enseñanzas judías de la perseverancia y las filosofías hindúes de la armonía, creando piezas que trascienden lo material. Nuestros artesanos, herederos de técnicas ancestrales, infunden cada joya con intención: un anillo que representa la eternidad, un collar que evoca la libertad. En Ébano & Bronce, no vendemos joyas; regalamos legados.</p>
+      </div>
+
+      {/* Tres columnas expandidas */}
       <div className={styles.columns}>
         <div className={styles.column}>
+          <div className={styles.icon}>💎</div>
           <h2>Estilo y Elegancia</h2>
-          <p>
-          La joyería es una expresión de nuestra esencia, y cada pieza que creamos está pensada para reflejar el lujo, la sofisticación y el estilo atemporal que define nuestra marca. En Ebano&Bronce, entendemos que la elegancia no es simplemente un adorno, sino una extensión de la personalidad, un detalle que habla de la confianza y el buen gusto. Cada joya está meticulosamente diseñada para complementar no solo la belleza de quien la lleva, sino también la de la ocasión. Inspirados por las culturas y tradiciones más exquisitas, buscamos fusionar lo clásico con lo moderno, creando colecciones que trascienden generaciones. Ya sea un delicado anillo, un colgante enigmático o unos aretes refinados, nuestra joyería es un testamento a la elegancia que nunca pasa de moda, y que siempre resalta en cada momento especial.
-          </p>
+          <p>"La elegancia es el único lujo que nunca pasa de moda." – Coco Chanel</p>
+          <p>En Ébano & Bronce, cada pieza refleja lujo atemporal, fusionando culturas para resaltar tu esencia única. Nuestros diseños capturan la sofisticación francesa, con líneas limpias y detalles intrincados, mientras incorporan toques hindúes de simbolismo espiritual. Imagina un collar que no solo embellece, sino que cuenta tu historia personal, adaptándose a bodas, galas o momentos cotidianos de reflexión.</p>
+          <p>La elegancia aquí es inclusiva: desde piezas minimalistas para el día a día hasta creaciones audaces para ocasiones especiales. Cada joya es una extensión de ti, diseñada para durar generaciones.</p>
         </div>
         <div className={styles.column}>
+          <div className={styles.icon}>🌍</div>
           <h2>Diseño Multicultural</h2>
-          <p>
-          La riqueza de las culturas del mundo se entrelaza en cada una de nuestras piezas, brindando a Ebano&Bronce una identidad única y diversa. Nuestros diseños están profundamente inspirados en las tradiciones de múltiples países, desde la elegancia de la joyería francesa hasta los vibrantes matices de la India, sin olvidar la delicadeza de la joyería alemana y el espíritu audaz de Argentina. Cada pieza es un homenaje a la fusión de costumbres, creencias y estilos, creando joyas que cuentan una historia de unidad, respeto y admiración por la diversidad. Nos enorgullece combinar técnicas ancestrales con enfoques contemporáneos, asegurando que cada joya sea tanto una obra de arte como una pieza funcional, adaptada a los gustos y estilos de vida más modernos. Nuestro diseño multicultural no solo embellece, sino que conecta a las personas con la historia, la tradición y el futuro de una manera que solo la joyería puede lograr.
-          </p>
+          <p>"La diversidad es la belleza del mundo." – Inspiración hindú</p>
+          <p>Inspirados en Francia, India, Alemania y Argentina, creamos joyas que conectan tradiciones con modernidad. Nuestros anillos combinan la precisión germana con motivos florales indios, mientras que los pendientes evocan la pasión latina. Esta fusión no es casual: es un homenaje a la humanidad, donde cada cultura aporta su magia – el refinamiento europeo, la espiritualidad oriental, la innovación americana.</p>
+          <p>Descubre colecciones como "Ébano Essence" (inspirada en bosques sagrados) o "Bronce Heritage" (un guiño a metales ancestrales). Cada diseño es una conversación entre mundos, perfecta para quienes valoran la riqueza cultural.</p>
         </div>
         <div className={styles.column}>
+          <div className={styles.icon}>✨</div>
           <h2>Materiales de Alta Calidad</h2>
-          <p>
-          La calidad es el pilar fundamental en Ebano&Bronce, y nos aseguramos de que cada joya que diseñamos sea una verdadera obra maestra. Trabajamos con los materiales más selectos, desde el oro más puro hasta piedras preciosas de la más alta calidad, garantizando no solo la belleza visual, sino también la durabilidad y el valor de nuestras piezas. Nuestros metales son cuidadosamente elegidos por su resistencia y su capacidad para mantener su brillo y esplendor con el paso del tiempo. Las gemas que seleccionamos provienen de fuentes responsables, cada una de ellas con su propio carácter y singularidad. Estas piedras, ya sean rubíes, zafiros, esmeraldas o diamantes, son cortadas con precisión para maximizar su resplandor y resaltar la majestuosidad de cada diseño. En Ebano&Bronce, creemos que la verdadera calidad se refleja en cada detalle, desde el primer boceto hasta la última piedra colocada, asegurando que nuestras joyas no solo sean un placer visual, sino también un legado que perdurará por generaciones.
-          </p>
+          <p>"La calidad perdura más que el precio." – Sabiduría judía</p>
+          <p>Oro puro, gemas preciosas y técnicas ancestrales garantizan durabilidad y esplendor eterno. Seleccionamos diamantes de talla perfecta, rubíes que brillan como el fuego hindú, y zafiros que recuerdan los cielos franceses. Nuestros metales son forjados con cuidado, resistiendo el tiempo sin perder lustre.</p>
+          <p>Cada piedra es certificada, proveniente de fuentes éticas, asegurando que tu joya no solo sea hermosa, sino responsable. Desde el primer boceto hasta el pulido final, priorizamos la excelencia, creando piezas que se convierten en reliquias familiares.</p>
         </div>
       </div>
 
@@ -49,16 +138,32 @@ const Home = () => {
         <img src={banner2} alt="Banner secundario" className={styles.bannerImage} />
       </div>
 
-      {/* Mostrar el panel de administración = si el usuario  es Administrador */}
-      {user?.role === 'Administrador' ? (
-        <AdminPanel />
-      ) : (
-        <p className={styles.accessDenied}>No tienes permisos para acceder a esta sección.</p>
-      )}
+      {/* Nueva sección: Testimonios */}
+      <div className={styles.testimonialsSection}>
+        <h2>Voces de Nuestros Clientes</h2>
+        <div className={styles.testimonials}>
+          <div className={styles.testimonial}>
+            <p>"Ébano & Bronce transformó mi boda con un anillo que fusiona mi herencia india y francesa. ¡Pura magia!" – Sofia, París</p>
+          </div>
+          <div className={styles.testimonial}>
+            <p>"La calidad es incomparable; mis aretes hindúes inspirados duran años. Recomiendo esta elegancia multicultural." – David, Berlín</p>
+          </div>
+          <div className={styles.testimonial}>
+            <p>"Cada pieza cuenta una historia. Mi collar judío-argentino es mi tesoro diario." – Maria, Buenos Aires</p>
+          </div>
+        </div>
+      </div>
 
       {/* Banner terciario */}
       <div className={styles.tertiaryBanner}>
         <img src={banner3} alt="Banner terciario" className={styles.bannerImage} />
+      </div>
+
+      {/* Footer Teaser */}
+      <div className={styles.footerTeaser}>
+        <h2>Descubre Más</h2>
+        <p>Explora nuestras colecciones exclusivas y únete a la comunidad de Ébano & Bronce. Contacta con nosotros para personalizaciones únicas.</p>
+        <Link to="/contact" className={styles.ctaButton}>Contáctanos</Link>
       </div>
     </div>
   );

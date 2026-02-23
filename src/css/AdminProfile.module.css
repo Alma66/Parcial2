@@ -1,0 +1,84 @@
+.adminProfile {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background: linear-gradient(135deg, #FFFDD0 0%, #800020 50%, #000080 100%); /* Crema-burdeos-azul marino */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3); /* Sombra profunda + brillo oro */
+  font-family: 'Times New Roman', serif;
+  color: #000080; /* Azul marino */
+}
+
+.adminProfile h2 {
+  color: #FFD700; /* Oro */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.menu button {
+  padding: 15px;
+  background: linear-gradient(45deg, #800020, #FFD700); /* Burdeos-oro */
+  color: #FFFDD0; /* Crema */
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+.menu button:hover {
+  background: linear-gradient(45deg, #FFD700, #000080); /* Oro-azul */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.subMenu {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+.subMenu button {
+  padding: 10px;
+  background: #FFFDD0; /* Crema */
+  color: #800020; /* Burdeos */
+  border: 1px solid #FFD700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subMenu button:hover {
+  background: #FFD700; /* Oro */
+}
+
+.subMenu form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.subMenu input {
+  padding: 10px;
+  border: 2px solid #FFD700;
+  border-radius: 6px;
+  background: #FFFDD0;
+  color: #000080;
+}
+
+.subMenu button[type="submit"] {
+  background: #800020; /* Burdeos */
+  color: #FFFDD0;
+  border: none;
+}

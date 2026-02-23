@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import Logout from './sesion/Logout';
+import { useAuth } from '../context/AuthContext.js';
+import Logout from './sesion/Logout.js';
 import styles from '../css/Header.module.css'; 
 
 const Header = () => {
@@ -15,14 +15,17 @@ const Header = () => {
         <Link to="/sobrenosotros">Sobre Nosotros</Link>
         <Link to="/products">Productos</Link>
 
-       {/* Solo mostrar el enlace al carrito si el usuario es rol = USER -*/}
-        {user && user.role !== 'Administrador' && <Link to="/cart">Carrito</Link>}
+        {/* Mostrar carrito solo para users, Admin Panel solo para admins */}
+        {user && user.role !== 'admin' && <Link to="/cart">Carrito</Link>}
+        {user && user.role === 'admin' && <Link to="/admin">Admin Panel</Link>}
 
         {user ? (
           <div className={styles.userInfo}>
-            <p>Bienvenido, {user.username}</p>
+            {/* Solo "Bienvenido, nombre" y clic para ir a perfil */}
+            <Link to={user.role === 'admin' ? '/admin-profile' : '/user-profile'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <p>Bienvenido, {user.name || user.username}!</p>
+            </Link>
             <Logout className={styles.logoutButton} />
-            {user.role === 'Administrador' && <Link to="/admin">Panel de Administración</Link>}
           </div>
         ) : (
           <>

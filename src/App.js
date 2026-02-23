@@ -1,35 +1,43 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';  
-import Footer from './components/Footer';  a
-import Home from './pages/Home';  // Página principal
-import Products from './pages/Product';  // Página de productos
-import Cart from './components/Cart';  // Componente para el carrito
-import { AuthProvider } from './context/AuthContext';  // Contexto de autenticación
-import { CartProvider } from './context/CartContext';  // Contexto del carrito
-import Login from './components/sesion/Login';  // Componente de login
-import Register from './components/sesion/Register';  // Componente de registro
-import Logout from './components/sesion/Logout';  // Componente de cierre de sesión
-import AdminPanel from './components/AdminPanel';  // Panel de administración
-import SobreNosotros from './pages/SobreNosotros';  // Página sobre nosotros
+import Header from './components/Header.js';  
+import Footer from './components/Footer.js'; 
+import Home from './pages/Home.js';
+import Contact from './pages/Contact.js';
+import Products from './pages/Product.js';
+import ProductDetail from './pages/ProductDetail.js'; // Nuevo: Vista detallada
+import Cart from './components/Cart.js';
+import { AuthProvider } from './context/AuthContext.js';
+import { CartProvider } from './context/CartContext.js';
+import Login from './components/sesion/Login.js';
+import Register from './components/sesion/Register.js';
+import Logout from './components/sesion/Logout.js';
+import AdminPanel from './components/AdminPanel.js';
+import SobreNosotros from './pages/SobreNosotros.js';
+import UserProfile from './components/UserProfile.js';
+import AdminProfile from './components/AdminProfile.js';
+import { useAuth } from './context/AuthContext.js';
 
 function App() {
   return (
-    // AuthProvider y CartProvider = datos de la autenticación y el carrito
     <AuthProvider>
       <CartProvider>
         <Router>
           <div className="App">
             <Header />  
             <Routes>
-              <Route path="/" element={<Home />} />  {/* Ruta principal */}
-              <Route path="/sobrenosotros" element={<SobreNosotros />} />  {/* Ruta sobre nosotros */}
-              <Route path="/products" element={<Products />} /> {/* Ruta para productos */}
-              <Route path="/cart" element={<Cart />} />  {/* Ruta para el carrito */}
-              <Route path="/login" element={<Login />} />  {/* Ruta para login */}
-              <Route path="/register" element={<Register />} />  {/* Ruta para registro */}
-              <Route path="/logout" element={<Logout />} />  {/* Ruta para logout */}
-              <Route path="/admin" element={<AdminRoute />} />  {/* Ruta para panel de administrador */}
+              <Route path="/" element={<Home />} />
+               <Route path="/contact" element={<Contact />} />
+              <Route path="/sobrenosotros" element={<SobreNosotros />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:id" element={<ProductDetail />} /> {/* Nuevo: Vista detallada */}
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/admin" element={<AdminRoute />} />
+              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/admin-profile" element={<AdminProfile />} />
             </Routes>
             <Footer />  
           </div>
@@ -39,11 +47,9 @@ function App() {
   );
 }
 
-// Componente = solo permitir el acceso al AdminPanel a administradores
 const AdminRoute = () => {
-  const { user } = useAuth();  // Obtener el usuario =  contexto de autenticación
-  // Administrador = AdminPanel / User = Pagina Principal
-  return user && user.role === 'Administrador' ? <AdminPanel /> : <Home />;
+  const { user } = useAuth();
+  return user && user.role === 'admin' ? <AdminPanel /> : <Home />;
 };
 
-export default App;  
+export default App;

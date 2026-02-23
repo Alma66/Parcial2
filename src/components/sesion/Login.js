@@ -1,41 +1,57 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';  // Importar useNavigate
+import { useAuth } from '../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../css/Login.module.css';
 
 const Login = () => {
-  const { login, user } = useAuth(); //funciones de login y la información del usuario 
-  const navigate = useNavigate();  // Inicializar useNavigate = realizar redirecciones
-  const [username, setUsername] = useState(''); // Estado para guardar nombre user
-  const [password, setPassword] = useState(''); // Estado para guardar contraseña
-  const [error, setError] = useState(''); // Estado para manejar  errores 
+  const { login, user } = useAuth(); // funciones del contexto
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-   // Función  envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-     // Verificar si el nombre de usuario y la contraseña están vacíos
-    if (!username || !password) {
-      setError('Por favor, ingresa un usuario y una contraseña.');
-      return;
-    }
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
 
-    // Intentar iniciar sesión 
-    const loginError = login(username, password); // Captura el error devuelto por login
+  if (!username || !password) {
+    setError('Por favor, ingresa un usuario y una contraseña.');
+    return;
+  }
 
-    if (loginError) {
-      setError(loginError); // Si hay error, mostrarlo
-    } else {
-      setError(''); // Limpiar error si login funciona
+  setLoading(true);
+  try {
+    // dentro de handleSubmit después de obtener result:
+const result = await login(username, password);
+setLoading(false);
 
-      // Si el login funciona y el usuario es administrador, redirigir a AdminPanel
-      if (user && user.role === 'Administrador') {
-        navigate('/admin');  // Redirige a AdminPanel (ajusta la ruta si es necesario)
-      } else {
-        navigate('/');  // Si no es administrador, redirige a la página principal
-      }
-    }
-  };
+if (!result.ok) {
+  setError(result.message || 'Error en el login');
+  return;
+}
+
+// result.user contiene el payload decodificado (si el backend provee token)
+const role = result.user?.role;
+
+// Normalizamos role para comparar
+const isAdmin =
+  !!role &&
+  (Array.isArray(role)
+    ? role.map((r) => String(r).toLowerCase()).includes('admin')
+    : String(role).toLowerCase() === 'admin');
+
+if (isAdmin) navigate('/admin');
+else navigate('/');
+
+
+  } catch (err) {
+    setLoading(false);
+    setError('Ocurrió un error inesperado al iniciar sesión.');
+    console.error('Login error:', err);
+  }
+};
+
 
   return (
     <div className={styles.loginPage}>
@@ -48,14 +64,18 @@ const Login = () => {
             placeholder="Usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
           />
           <input
             type="password"
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
-          <button type="submit">Iniciar sesión</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Ingresando...' : 'Iniciar sesión'}
+          </button>
         </form>
       </div>
     </div>

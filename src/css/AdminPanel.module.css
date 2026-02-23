@@ -1,77 +1,115 @@
-/* General styling for the Admin Panel */
 .adminPanel {
-    background-color: #000; /* Fondo negro */
-    color: #fff; /* Texto blanco */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elegante */
-  }
-  
-  /* Title styling */
-  .adminPanel h2 {
-    font-size: 24px;
-    color: #ffd700; /* Dorado brillante */
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Paragraph styling */
-  .adminPanel p {
-    font-size: 16px;
-    text-align: center;
-    color: #ccc; /* Blanco suave */
-    margin-bottom: 30px;
-  }
-  
-  /* Table styling */
-  .adminPanel table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .adminPanel th,
-  .adminPanel td {
-    border: 1px solid #ffd700; /* Borde dorado */
-    padding: 12px;
-    text-align: center;
-  }
-  
-  .adminPanel th {
-    background-color: #222; /* Fondo oscuro para encabezados */
-    color: #ffd700; /* Texto dorado */
-  }
-  
-  .adminPanel td {
-    background-color: #111; /* Fondo oscuro */
-    color: #fff; /* Texto blanco */
-  }
-  
-  /* Buttons styling */
-  .adminPanel button {
-    background-color: #ffd700; /* Fondo dorado */
-    color: #000; /* Texto negro */
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .adminPanel button:hover {
-    background-color: #e5c100; /* Dorado más oscuro al pasar el mouse */
-  }
-  
-  /* Add some spacing */
-  .adminPanel button + button {
-    margin-left: 8px;
-  }
-  
-  /* Table row hover effect */
-  .adminPanel tr:hover td {
-    background-color: #333; /* Resaltar fila */
-  }
-  
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #FFFDD0 0%, #800020 50%, #000080 100%); /* Crema-burdeos-azul marino */
+  font-family: 'Times New Roman', serif;
+}
+
+.sidebar {
+  width: 250px;
+  background: rgba(0, 0, 0, 0.9); /* Negro translúcido con profundidad */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-right: 3px solid #FFD700; /* Oro */
+}
+
+.sidebar h3 {
+  color: #FFFDD0; /* Crema */
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.sidebar button {
+  display: block;
+  margin: 10px 0;
+  padding: 12px;
+  width: 100%;
+  background: linear-gradient(45deg, #800020, #FFD700); /* Burdeos-oro */
+  color: #FFFDD0; /* Crema */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar button:hover {
+  background: linear-gradient(45deg, #FFD700, #000080); /* Oro-azul marino */
+  transform: translateY(-2px);
+}
+
+.active {
+  background: linear-gradient(45deg, #FFD700, #000080) !important;
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.5); /* Brillo oro */
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  background: rgba(255, 253, 208, 0.9); /* Crema translúcida */
+  overflow-y: auto;
+}
+
+.content h2 {
+  color: #FFD700; /* Oro */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFDD0; /* Crema */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+th, td {
+  border: 1px solid #FFD700; /* Oro */
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(45deg, #800020, #FFD700); /* Burdeos-oro */
+  color: #FFFDD0; /* Crema */
+  position: sticky; /* Header fijo, no scroll */
+  top: 0;
+}
+
+tbody {
+  max-height: 400px; /* Altura máxima para scroll solo en datos */
+  overflow-y: auto;
+  display: block;
+}
+
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+form input {
+  padding: 10px;
+  border: 2px solid #FFD700; /* Oro */
+  border-radius: 6px;
+  background: #FFFDD0; /* Crema */
+  color: #000080; /* Azul marino */
+}
+
+form button {
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #800020, #FFD700); /* Burdeos-oro */
+  color: #FFFDD0; /* Crema */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover {
+  background: linear-gradient(45deg, #FFD700, #000080); /* Oro-azul */
+  transform: translateY(-2px);
+}

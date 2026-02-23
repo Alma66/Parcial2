@@ -1,0 +1,67 @@
+.contactContainer {
+  font-family: 'Times New Roman', serif;
+  color: #ddd;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
+  min-height: 100vh;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contactContainer h1 {
+  color: gold;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.contactForm {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input, .textarea {
+  padding: 15px;
+  border: 1px solid gold;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+  font-size: 1rem;
+}
+
+.textarea {
+  height: 150px;
+  resize: none;
+}
+
+.ctaButton {
+  background: gold;
+  color: black;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.ctaButton:hover {
+  background: #ffd700;
+}
+
+.success {
+  color: gold;
+  font-size: 1.2rem;
+}
+
+.backLink {
+  color: gold;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}

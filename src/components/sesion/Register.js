@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../css/Register.module.css';
 
 const Register = () => {
-  const { register, login } = useAuth(); // Funciones de registro e inicio de sesión
+  const { register, login } = useAuth(); // funciones del contexto
+  const navigate = useNavigate();
   const [username, setUsername] = useState(''); // Estado = nombre de usuario
   const [password, setPassword] = useState(''); // Estado = contraseña
   const [error, setError] = useState(''); // Para mostrar errores
+  const [loading, setLoading] = useState(false);
 
   // Función que maneja el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     // Verificar que los campos no estén vacíos
     if (!username || !password) {
@@ -18,17 +22,48 @@ const Register = () => {
       return;
     }
 
-    // Intentar registrar al nuevo usuario
-    const errorMessage = register(username, password);
+    setLoading(true);
+    try {
+      // Intentar registrar al nuevo usuario (register espera un objeto payload)
+      const res = await register({ username, password });
 
-    if (errorMessage) {
-      setError(errorMessage); // Si hubo un error (usuario ya existe)
-    } else {
-      // Si no hubo error, hacer login automáticamente
-      login(username, password);
-      setUsername('');
-      setPassword('');
-      setError('');
+     setLoading(false);
+
+if (!res.ok) {
+  setError(res.message || 'No se pudo registrar el usuario.');
+  return;
+}
+
+// Si register devolvió user (porque devolvió accessToken)
+if (res.user) {
+  // redirigir según rol
+  const role = res.user.role;
+  const isAdmin = Array.isArray(role)
+  ? role.map(r => String(r).toLowerCase()).includes('admin')
+  : String(role || '').toLowerCase() === 'admin';
+  if (isAdmin) navigate('/admin');
+  else navigate('/');
+  return;
+}
+
+// Si no devolvió token, intentar logear automáticamente (como ya tenías)
+const loginRes = await login(username, password);
+if (!loginRes.ok) {
+  setError(`Registro ok pero no se pudo iniciar sesión: ${loginRes.message || ''}`);
+  return;
+}
+navigate('/');
+
+      // Si todo ok => redirect a home
+      navigate('/');
+    } catch (err) {
+      setLoading(false);
+      console.error('Register error:', err);
+      setError('Ocurrió un error inesperado al registrarse.');
+    } finally {
+      // Limpiar campos si querés (opcional)
+      // setUsername('');
+      // setPassword('');
     }
   };
 
@@ -42,16 +77,19 @@ const Register = () => {
             type="text"
             placeholder="Usuario"
             value={username}
-            onChange={(e) => setUsername(e.target.value)} // Cambiar el estado con el valor del input
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
           />
           <input
             type="password"
             placeholder="Contraseña"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} // Cambiar el estado con el valor del input
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
           />
-           {/* Botón de envío, se desactiva si falta algún campo */}
-          <button type="submit" disabled={!username || !password}>Registrarse</button>
+          <button type="submit" disabled={loading || !username || !password}>
+            {loading ? 'Registrando...' : 'Registrarse'}
+          </button>
         </form>
       </div>
     </div>
