@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Para obtener ID y navegar
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { useCart } from '../context/CartContext.js';
 import { useAuth } from '../context/AuthContext.js';
 import styles from '../css/ProductDetail.module.css';
 
 const ProductDetail = () => {
-  const { id } = useParams(); // Obtener ID del producto desde URL
-  const navigate = useNavigate(); // Para redirigir al login si no autenticado
+  const { id } = useParams(); 
+  const navigate = useNavigate(); 
   const { addToCart, notification } = useCart();
   const { user } = useAuth();
   const [product, setProduct] = useState(null);
@@ -31,10 +31,10 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!user) {
-      navigate('/login'); // Redirigir al login si no autenticado
+      navigate('/login'); 
       return;
     }
-    addToCart(product); // Agregar al carrito si autenticado
+    addToCart(product); 
   };
 
   if (loading) return <div className={styles.productDetail}><p>Cargando producto...</p></div>;

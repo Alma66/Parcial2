@@ -6,7 +6,6 @@ import hermana3 from '../assets/images/aboutus/hermana3.jpg';
 import hermanos2 from '../assets/images/aboutus/hermanos2.jpg';
 import pjoven3 from '../assets/images/aboutus/pjoven3.png';
 
-//Componente = la historia de la marca
 const SobreNosotros = () => {
   return (
     <div className={styles.container}>  {/* Contenedor principal con estilos */}

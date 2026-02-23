@@ -1,4 +1,3 @@
-// server/controllers/product.controller.js
 import prisma from '../prismaClientProxy.js';
 import multer from 'multer';
 const upload = multer({ dest: 'uploads/products/' });  
@@ -8,7 +7,7 @@ export const uploadProductImage = [
   (req, res) => {
     if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
     const imageUrl = `http://localhost:5000/uploads/products/${req.file.filename}`;
-    res.json({ imageUrl });  // Devuelve la URL para usar en create/update product
+    res.json({ imageUrl });  
   }
 ];
 // Crear product (solo admin)

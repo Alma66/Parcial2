@@ -80,7 +80,7 @@ const Products = () => {
               <h3>{product.name}</h3>
               <p>${product.price}</p>
               <p>Categoría: {product.category?.name || 'Sin categoría'}</p>
-              {/* Cambiar botón a "Ver pieza" con Link a /product/:id */}
+              {}
               <Link to={`/product/${product.id}`} className={styles.viewPieceButton}>
                 Ver pieza
               </Link>

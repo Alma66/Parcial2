@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../css/Contact.module.css'; // Crea este CSS si no existe, o usa el de Home.module.css temporalmente
+import styles from '../css/Contact.module.css'; 
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });

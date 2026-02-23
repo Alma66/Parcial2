@@ -1,8 +1,6 @@
-// server/controllers/user.controller.js
 import bcrypt from 'bcryptjs';
 import prisma from '../prismaClientProxy.js';
 
-// Registro público (sin auth)
 export const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
